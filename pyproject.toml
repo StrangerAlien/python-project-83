@@ -2,9 +2,10 @@
 name = "hexlet-code"
 version = "0.1.0"
 description = "page analyzer"
-authors = ["aleksei"]
-license = "GPL"
+authors = ["aleksei <jiunov@gmail.com>"]
+license = "Free"
 readme = "README.md"
+packages = [{include = "page_analyzer"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
