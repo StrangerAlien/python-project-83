@@ -1,34 +1,44 @@
 from flask import Flask, render_template
-import psycopg2
-import os
-from dotenv import load_dotenv
+from page_analyzer.secrets import SECRET_KEY
+
+from page_analyzer import actions_with_db as db
 
 
-load_dotenv()
+from datetime import datetime, timezone
+from urllib.parse import urlparse
+
 app = Flask(__name__)
-app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
-DATABASE_URL = os.getenv('DATABASE_URL')
+app.config['SECRET_KEY'] = SECRET_KEY
 
 
 @app.route('/')
-def hello_python_project_83():
+def index():
     return render_template('index.html')
 
 
-# url_connect = 'postgresql://hexlet:hexlet@localhost/sites'
+@app.post('/urls')
+def urls():
+    return render_template('test.html')
 
-try:
-    # conn = psycopg2.connect(dbname="sites", host="localhost", user="hexlet", password="hexlet")
-    conn = psycopg2.connect(DATABASE_URL)
-    # print(conn)
-except:
-    print('zalupa')
 
-cursor = conn.cursor()
-cursor.execute('SELECT * FROM urls')
-all_users = cursor.fetchall()
-
-print(all_users)
-
-cursor.close()  # закрываем курсор
-conn.close()  # закрываем соединение
+# @app.route('/')
+# def home(url=''):
+#     return render_template('index.html', url=url)
+#
+#
+# @app.route('/urls', methods=['POST'])
+# def test(url=''):
+#     # добавляй в базу данных
+#     add_new_url(conn, url)
+#     return render_template('test.html', url=url)
+#
+#
+# def add_new_url(conn, url):
+#     """Create new name in database from url and return """
+#     conn = psycopg2.connect(DATABASE_URL)
+#     cursor = conn.cursor()
+#     with conn.cursor() as cur:
+#         cur.execute('INSERT INTO urls (name, created_at) VALUES (%s, %s) ;', (url, datetime.now()))
+#
+#     cursor.close()  # закрываем курсор
+#     conn.close()
