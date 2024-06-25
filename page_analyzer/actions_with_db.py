@@ -1,22 +1,18 @@
 import psycopg2
 from page_analyzer.secrets import DATABASE_URL
-import os
+from datetime import datetime
 
 
-def test_db():
-    print('YO')
+def connect_db():
+    try:
+        conn = psycopg2.connect(DATABASE_URL)
+        return conn
+    except:
+        print('Can`t establish connection to database')
 
 
-try:
-    conn = psycopg2.connect(DATABASE_URL)
-except:
-    print('zalupa')
-
-cursor = conn.cursor()
-cursor.execute('SELECT * FROM urls')
-all_users = cursor.fetchall()
-
-print(all_users)
-
-cursor.close()  # закрываем курсор
-conn.close()  # закрываем соединение
+def save_url(url):
+    conn = connect_db()
+    with conn.cursor() as curs:
+        curs.execute('INSERT INTO urls (name, created_at) VALUES (%s, %s);', (url, datetime.now()))
+        conn.commit()
