@@ -7,7 +7,7 @@ def connect_db():
     try:
         conn = psycopg2.connect(DATABASE_URL)
     except Exception as error:
-        # print('Can`t establish connection to database')
+        print('Can`t establish connection to database')
         raise error
     return conn
 
