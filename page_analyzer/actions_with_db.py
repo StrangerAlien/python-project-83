@@ -30,5 +30,5 @@ def get_data_by_id(id):
 def get_data_all_urls():
     conn = connect_db()
     with conn.cursor() as curs:
-        curs.execute('SELECT * FROM urls;')
+        curs.execute('SELECT * FROM urls ORDER BY id DESC;')
         return curs.fetchall()
