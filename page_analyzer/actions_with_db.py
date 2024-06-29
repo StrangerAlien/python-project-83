@@ -25,3 +25,10 @@ def get_data_by_id(id):
     with conn.cursor() as curs:
         curs.execute('SELECT * FROM urls WHERE id=%s', (id,))
         return curs.fetchone()
+
+
+def get_data_all_urls():
+    conn = connect_db()
+    with conn.cursor() as curs:
+        curs.execute('SELECT * FROM urls;')
+        return curs.fetchall()
