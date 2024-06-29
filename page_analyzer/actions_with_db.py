@@ -18,3 +18,10 @@ def save_url(url):
         curs.execute('INSERT INTO urls (name, created_at) VALUES (%s, %s);',
                      (url, datetime.now()))
         conn.commit()
+
+
+def get_data_by_id(id):
+    conn = connect_db()
+    with conn.cursor() as curs:
+        curs.execute('SELECT * FROM urls WHERE id=%s', (id,))
+        return curs.fetchone()

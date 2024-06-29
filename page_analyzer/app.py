@@ -17,9 +17,26 @@ def post_urls():
     url = data.get('url').lower()
 
     db.save_url(url)
-    return render_template('inside_base.html')
+    return render_template('url.html')
 
 
-@app.get('/urls')
-def get_urls():
-    pass
+# @app.get('/urls')
+# def get_urls():
+#     pass
+
+
+# @app.post('/urls/<int:url_id>')
+# def post_urls():
+#     data = request.form.to_dict()
+#     url = data.get('url').lower()
+#
+#     db.save_url(url)
+#     return render_template('index.html')
+#
+#
+@app.get('/urls/<int:url_id>')
+def get_urls(url_id):
+    with db.connect_db():
+        url_data = db.get_data_by_id(url_id)
+        name = url_data[1]
+    return render_template('url.html', url_id=name)
