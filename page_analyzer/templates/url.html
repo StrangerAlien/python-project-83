@@ -2,7 +2,25 @@
 
 {% block content %}
 
-<h1>добавил url в базу</h1>
-<h2> {{ url_id }} </h2>
+    <div class="container-lg mt-3">
+        <div class="table-responsive">
+        <table class="table table-bordered table-hover text-nowrap" data-test="url">
+        <tbody>
+            <tr>
+                <td>ID</td>
+                <td>{{ url_id }}</td>
+            </tr>
+            <tr>
+                <td>Имя</td>
+                <td>{{ name }}</td>
+            </tr>
+            <tr>
+                <td>Дата создания</td>
+                <td>{{ date }}</td>
+            </tr>
+        </tbody>
+        </table>
+        </div>
+    </div>
 
 {% endblock %}
