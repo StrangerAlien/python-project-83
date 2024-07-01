@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, redirect, url_for
 from page_analyzer.secrets import SECRET_KEY
 from page_analyzer import actions_with_db as db
 
@@ -15,8 +15,16 @@ def index():
 def get_all_urls():
     with db.connect_db():
         url_data = db.get_data_all_urls()
-        print(url_data)
         return render_template('urls.html', urls=url_data)
+
+
+@app.post('/urls')
+def post_urls():
+    data = request.form.to_dict()
+    url = data.get('url').lower()
+
+    url_id = db.save_url(url)
+    return redirect(url_for('get_url', url_id=url_id[0])) #вместо 2 сука нужное id нужно
 
 
 @app.get('/urls/<int:url_id>')
@@ -28,16 +36,6 @@ def get_url(url_id):
         date = url_data[2]
 
     return render_template('url.html', url_id=url_id, name=name, date=date)
-
-
-@app.post('/urls')
-def post_urls():
-    data = request.form.to_dict()
-    url = data.get('url').lower()
-
-    db.save_url(url)
-    return render_template('urls.html')
-
 
 
 # @app.post('/urls/<int:url_id>/checks')

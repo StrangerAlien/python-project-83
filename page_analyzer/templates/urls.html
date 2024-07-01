@@ -3,6 +3,7 @@
 {% block content %}
 
     <div class="container-lg mt-3">
+        <h1>Сайты</h1>
         <div class="table-responsive">
           <table class="table table-bordered table-hover text-nowrap" data-test="url">
 
@@ -19,10 +20,10 @@
               {% for url in urls %}
 
               <tr>
-                  <td>{{ url[0] }}</td>
-                  <td><a href="urls/{{ url[0] }}">{{ url[1] }}</a></td>
-                  <td>{{ url[2] }}</td>
-                  <td>{{ url[3] }}</td>
+                 <td>{{ url[0] }}</td>
+                 <td><a href="urls/{{ url[0] }}">{{ url[1] }}</a></td>
+                 <td>{{ url[2] }}</td>
+                 <td>{{ url[3] }}</td>
               </tr>
 
               {% endfor %}
