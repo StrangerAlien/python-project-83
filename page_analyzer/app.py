@@ -24,7 +24,7 @@ def post_urls():
     url = data.get('url').lower()
 
     url_id = db.save_url(url)
-    return redirect(url_for('get_url', url_id=url_id[0])) #вместо 2 сука нужное id нужно
+    return redirect(url_for('get_url', url_id=url_id))
 
 
 @app.get('/urls/<int:url_id>')
