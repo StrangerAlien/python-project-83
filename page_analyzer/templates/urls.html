@@ -4,22 +4,33 @@
 
     <div class="container-lg mt-3">
         <div class="table-responsive">
-        <table class="table table-bordered table-hover text-nowrap" data-test="url">
-        <tbody>
-            <tr>
-                <td>ID</td>
-                <td>{{ url_id }}</td>
-            </tr>
-            <tr>
-                <td>Имя</td>
-                <td>{{ name }}</td>
-            </tr>
-            <tr>
-                <td>Дата создания</td>
-                <td>{{ date }}</td>
-            </tr>
-        </tbody>
-        </table>
+          <table class="table table-bordered table-hover text-nowrap" data-test="url">
+
+            <thead>
+             <tr>
+                <th>ID</th>
+                <th>Имя</th>
+                <th>Последняя проверка</th>
+                <th>Код ответа</th>
+             </tr>
+            </thead>
+
+            <tbody>
+
+              {% for url in urls %}
+
+              <tr>
+                  <td>{{ url[0] }}</td>
+                  <td>{{ url[1] }}</td>
+                  <td>{{ url[2] }}</td>
+                  <td>{{ url[3] }}</td>
+              </tr>
+
+              {% endfor %}
+
+            </tbody>
+
+          </table>
         </div>
     </div>
 
